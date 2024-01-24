@@ -1,0 +1,172 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="styles.css"> -->
+  <title>User Login</title>
+</head>
+<style>
+  
+  body {
+    font-family: 'Avenir Next', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image:linear-gradient(280deg, rgba(21, 209, 252, 1), rgba(33, 175, 252, 1) 15%, rgba(255, 255, 255, 1) 100%);
+  }
+  
+  .container {
+    max-width: 500px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 550px;
+  }
+  
+  h1 {
+    size:17px;
+    text-align: center;
+    color: #333;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  input,
+  select,
+  textarea,
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .btn{
+    text-align: end;
+  }
+  
+  button {
+    width: 100px !important;
+    background-color: #1f1f21;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 0px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #505050;
+  }
+  
+
+  p {
+    margin-top: 10px; /* Adjust the top margin as needed */
+    font-size: 11px;
+    color: #555;
+  }
+
+  a {
+    color: #1f1f21;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  .login-reset{
+    margin-top: -60px;
+  }
+
+  a:hover {
+    color: #505050;
+  }
+  
+  </style>
+
+</style>
+<body>
+  <div class="container">
+    <h1>User Login</h1>
+    <div id="message"></div>
+    <div class="form-container">
+      <form id="login">
+        <label for="loginEmail">Email:</label>
+        <input type="email" id="loginEmail" name="loginEmail" required>
+
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" name="loginPassword" required>
+        <div class="btn">
+        <button type="submit">Login</button>
+        </div>
+      </form>
+      <div class="login-reset">
+        <p>Don't have an account? <a href="https://lublogo.com/pages/register">Register here</a>.</p>
+        <p>Forgot your password? <a href="https://lublogo.com/pages/forgot-password">Reset it here</a>.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+   // login.js
+document.addEventListener('DOMContentLoaded', function() {
+  const messageElement = document.getElementById('message');
+  const loginForm = document.getElementById('login');
+
+  loginForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    messageElement.innerHTML = 'Logging in...';
+
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+
+  // Make an API call to handle login
+fetch('https://bea-lublogo-api.onrender.com/login', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ email, password }),
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log('API Response:', data); // Log the data received from the API
+
+    if (data.message === 'Login successful') {
+      // Login successful, wait for 4 seconds, then redirect to the association page
+
+      const token = data.token;
+
+// Save the token to local storage for later use
+localStorage.setItem('jwtToken', token);
+
+     setTimeout(() => {
+      window.location.href = 'associationForm.html';
+      }, 2000); // 4000 milliseconds = 4 seconds
+    } else {
+      messageElement.innerHTML = data.error || 'Login failed';
+      }
+    })
+    .catch(error => {
+      console.error('Error during login:', error);
+      messageElement.innerHTML = 'Login failed';
+    });
+  });
+});
+
+
+  </script>
+</body>
+</html>

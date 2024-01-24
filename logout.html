@@ -1,0 +1,38 @@
+<!-- logout.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/styles.css">
+  <title>User Logout</title>
+</head>
+<body>
+  <div class="container">
+    <h1>User Logout</h1>
+    <div id="message"></div>
+    <div class="form-container">
+      <form id="logout">
+        <button type="submit">Logout</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+// logout.js
+document.addEventListener('DOMContentLoaded', function() {
+  const messageElement = document.getElementById('message');
+  const logoutForm = document.getElementById('logout');
+
+  logoutForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    messageElement.innerHTML = 'Logging out...';
+
+    // Simulate a logout by redirecting to the home page
+    window.location.href = 'home.html';
+  });
+});
+
+  </script>
+</body>
+</html>

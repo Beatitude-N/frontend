@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page des détails du produit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body{
+    background-image:linear-gradient(280deg, rgba(21, 209, 252, 1), rgba(33, 175, 252, 1) 15%, rgba(255, 255, 255, 1) 100%);
+    font-family: 'Poppins', sans-serif;
+}
+
+.flex-box {
+    display: flex;
+    width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+
+.price {
+    font-size: 24px;
+    font-weight: 600;
+    color: #00aeff; 
+    margin: 0px 0;
+    text-align: start;
+}
+
+.member-info {
+    margin-top: 20px;
+    text-align: start;
+}
+
+.member-info p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-align: start;
+}
+
+.member-info input {
+    width: 500px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.quantity {
+    display: flex;
+    align-items: start;
+    margin: 20px 0;
+    padding: 0px;
+    width: 220px;
+}
+
+.quantity p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 20px;
+    text-align: start;
+}
+
+.quantity input {
+    width: 60px;
+    padding: 8px;
+   margin-top: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: start;
+}
+
+input[type="checkbox"] {
+    margin-right: 5px;
+    text-align: start;
+}
+
+.size {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.size p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 15px;
+}
+
+.psize {
+    width: 40px;
+    height: 30px;
+    border: 1px solid #ccc;
+    color: #000;
+    text-align: center;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.psize.active {
+    border-width: 1.5px;
+    color: #00aeff; 
+    font-weight: 500;
+}
+
+
+
+
+.left {
+    width: 40%;
+}
+
+
+
+.big-img {
+    position: relative;
+    width: 250px;
+}
+
+.logo {
+    width: 40px;
+    position: absolute;
+    top: 55px; 
+    left: 150px; 
+    z-index: 2; 
+}
+
+.logo img {
+    width: 50px; 
+}
+
+
+.big-img img {
+    width: inherit;
+}
+
+.images {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin-top: 15px;
+}
+
+.small-img {
+    width: 50px;
+    overflow: hidden;
+    border: 1.5px solid black;
+}
+
+.small-img img {
+    width: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.small-img:hover img {
+    transform: scale(1.2);
+}
+
+.url {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: start;
+    color: rgb(0, 102, 255);
+}
+
+.pname {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+
+
+
+
+.size {
+    display: flex;
+}
+
+.psize {
+    cursor: pointer;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    width: 80px;
+    height: 40px;
+}
+
+.psize.selected {
+    background-color: #1f1f21;
+    color: #fff;
+}
+
+
+
+
+
+
+
+
+
+.quantity p {
+    font-size: 18px;
+    font-weight: 500;
+    text-align: start;
+}
+
+#quantityInput {
+    width: 50px;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: start;
+    margin-left: 15px;
+}
+
+.btn-box {
+    display: flex;
+    margin-top: 40px;
+}
+
+.btn-box button {
+    font-size: 18px;
+    padding: 8px 25px;
+    border: none;
+    outline: none;
+    border-radius: 0px;
+    cursor: pointer;
+    color: white;
+}
+
+.buy-btn {
+    background-color: #1f1f21;
+}
+
+
+.buy-btn:hover {
+    background-color: #0066ff;
+}
+
+
+
+.left {
+    width: 40%;
+}
+
+.right {
+    width: 60%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+
+
+.color {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    
+      .pcolor {
+        cursor: pointer;
+        padding: 5px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 0px;
+      }
+    
+      .pcolor.selected {
+        background-color: #1f1f21;
+        color: #fff;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        text-align: center;
+    }
+
+    /* Style for the overlay */
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+
+
+
+</style>
+
+<div class="flex-box">
+    <div class="left">
+        <div class="big-img">
+            <img src="https://i.ibb.co/0rkfL85/front-black-ss.png" alt="Image du produit">
+            <div class="logo">
+                <img src="https://i.ibb.co/2F8dYFr/logo.png" alt="Logo">
+            </div>
+        </div>
+        <div class="images">
+            <div class="small-img">
+                <img src="https://i.ibb.co/n11NKR5/front-blue-ss.png" onclick="showImg(this.src)">
+            </div>
+            <div class="small-img">
+                <img src="https://i.ibb.co/NZzdS65/front-yellow-ss.png" onclick="showImg(this.src)">
+            </div>
+            <div class="small-img">
+                <img src="https://i.ibb.co/Jt4bW0y/front-white-ss.png" onclick="showImg(this.src)">
+            </div>
+            <div class="small-img">
+                <img src="https://i.ibb.co/fp675m0/front-grey-ss.png" onclick="showImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="url"><h1>Béatitude</h1></div>
+        <div class="price">€24.99</div>
+        <div class="member-info">
+            <p>Nom du membre : <input type="text" name="memberName" required></p>
+        </div>
+      
+        <div class="quantity">
+            <p style="text-align: start;">Quantité:</p>
+            <input style="text-align: start;" type="number" min="1" max="5" value="1" id="quantityInput">
+        </div>
+        <div style="text-align: start;">
+            <label style="text-align: start;">
+                <input style="text-align: start;" type="checkbox" name="isChildSize" id="isChildSize"> Taille enfant
+            </label>
+        </div>
+
+        <!-- <div class="color">
+            <div class="pcolor" id="blackColor" onclick="toggleColor('black')">Black</div>
+            <div class="pcolor" id="blueColor" onclick="toggleColor('blue')">Blue</div>
+            <div class="pcolor" id="greenColor" onclick="toggleColor('green')">Green</div>
+            <div class="pcolor" id="grayColor" onclick="toggleColor('gray')">Gray</div>
+            <div class="pcolor" id="pinkColor" onclick="toggleColor('pink')">Pink</div>
+            <div class="pcolor" id="redColor" onclick="toggleColor('red')">Red</div>
+            <div class="pcolor" id="whiteColor" onclick="toggleColor('white')">White</div>
+            <div class="pcolor" id="yellowColor" onclick="toggleColor('yellow')">Yellow</div>
+          </div> -->
+          
+
+
+          <div class="size">
+            <div class="psize" id="sizeX" onclick="toggleSize('X')">X</div>
+            <div class="psize" id="sizeM" onclick="toggleSize('M')">M</div>
+            <div class="psize" id="sizeL" onclick="toggleSize('L')">L</div>
+            <div class="psize" id="sizeXL" onclick="toggleSize('XL')">XL</div>
+            <div class="psize" id="sizeXXL" onclick="toggleSize('XXL')">XXL</div>
+        </div>
+        
+        <div class="btn-box">
+            <button class="buy-btn" onclick="purchase()">Acheter</button>
+        </div>
+    </div>
+</div>
+
+<!-- Add this HTML at the end of your body tag -->
+<div class="overlay" id="overlay"></div>
+<div class="modal" id="successModal">
+    <p style="color: green; font-weight: bold;">Order submitted successfully! Thank you!</p>
+    <p>Redirecting you to checkout...</p>
+</div>
+
+<script>
+    let bigImg = document.querySelector('.big-img img');
+    
+    function showImg(pic) {
+        bigImg.src = pic;
+    }
+
+//     var selectedColor = null;
+
+// function toggleColor(color) {
+//     // Get the DOM element of the clicked color
+//     var colorElement = document.getElementById(color + 'Color');
+
+//     // If the clicked color is already selected, deselect it
+//     if (selectedColor === color) {
+//         colorElement.classList.remove('selected');
+//         selectedColor = null;
+//     } else {
+//         // Deselect the currently selected color, if any
+//         if (selectedColor) {
+//             var previousSelectedElement = document.getElementById(selectedColor + 'Color');
+//             previousSelectedElement.classList.remove('selected');
+//         }
+
+//         // Select the clicked color
+//         colorElement.classList.add('selected');
+//         selectedColor = color;
+//     }
+// }
+
+
+var selectedSize = null;
+
+function toggleSize(size) {
+    // Get the DOM element of the clicked size
+    var sizeElement = document.getElementById('size' + size);
+
+    // If the clicked size is already selected, deselect it
+    if (selectedSize === size) {
+        sizeElement.classList.remove('selected');
+        selectedSize = null;
+    } else {
+        // Deselect the currently selected size, if any
+        if (selectedSize) {
+            var previousSelectedElement = document.getElementById('size' + selectedSize);
+            previousSelectedElement.classList.remove('selected');
+        }
+
+        // Select the clicked size
+        sizeElement.classList.add('selected');
+        selectedSize = size;
+    }
+}
+
+
+function purchase() {
+    // Gather order data
+    var orderData = {
+        memberName: document.querySelector('.member-info input').value,
+        quantity: document.getElementById('quantityInput').value,
+       // color: selectedColor, 
+        size: selectedSize,   
+    };
+
+    // If child size checkbox is checked
+    if (document.getElementById('isChildSize').checked) {
+        // Add logic for child size if needed
+    }
+
+    // Make an HTTP POST request to the API
+    fetch('https://bea-lublogo-api.onrender.com/order', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error submitting order to the API');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Handle success
+        console.log('Order submitted successfully:', data);
+
+        // Show success message to the user
+        showSuccessMessage();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle error if needed
+    });
+}
+
+function showSuccessMessage() {
+        // Show the overlay and modal
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('successModal').style.display = 'block';
+
+        // Redirect to the checkout page after some time (e.g., 5 seconds)
+        setTimeout(function () {
+            // You can replace the following URL with your actual checkout page URL
+            window.location.href = '';
+        }, 5000); // Adjust the time as needed
+    }
+
+</script>
+
+</body>
+</html>

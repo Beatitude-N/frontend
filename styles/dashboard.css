@@ -1,0 +1,200 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image:linear-gradient(280deg, rgba(21, 209, 252, 1), rgba(33, 175, 252, 1) 15%, rgba(255, 255, 255, 1) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1 {
+    font-size: 36px; 
+    font-weight: bold; 
+    color: #333; 
+    text-align: start; 
+    margin-bottom: 20px; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+}
+
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    background-image:linear-gradient(280deg, rgba(21, 209, 252, 1), rgba(33, 175, 252, 1) 15%, rgba(255, 255, 255, 1) 100%);
+    padding: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 1200px;
+    height: 900px;
+}
+
+.head {
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.table-one {
+    width: 100%;
+    max-width: 600px;
+    margin-right: 20px;
+    background-color: #fff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: left;
+}
+
+
+
+.barcode-share {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    align-self: flex-end;
+    margin-top: 20px;
+}
+
+.barcode-scanner {
+    text-align: center;
+    padding: 20px;
+    background-color: #ffffff;
+}
+
+#qrCodeImage {
+    max-width: 100%;
+    height: auto;
+}
+
+.share-link {
+    padding: 20px;
+    text-align: center;
+}
+
+#productLink {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 14px;
+    word-break: break-all;
+}
+
+.stop-btn {
+    text-align: left;
+    margin-top: -300px;
+    margin-bottom: 20px;
+}
+
+.big-button {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 0px;
+    font-size: 16px;
+    display: inline-block;
+    transition: background-color 0.3s;
+    margin-left: 25px;
+}
+
+.big-button:hover {
+    background-color: #e60000;
+}
+
+.subtitle {
+    font-size: 14px;
+    color: #555;
+    margin-top: 10px;
+}
+
+button {
+    background-color: #1f1f21;;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 0px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #27ae60;
+}
+
+
+
+
+
+
+
+
+
+
+.profits-box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding-left: 10px;
+    border-radius: 0; /* Change this to 0 for square corners */
+    margin-bottom: 0px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 230px;
+    border-radius: 10px;
+    height: 180px;
+    position: absolute;
+    top: 115px; 
+    right: 55px; 
+    z-index: 2; 
+}
+
+
+.profits-box h2 {
+    font-size: 15px;
+    margin-top: 30px;
+    padding: 0px;
+    text-align: center;
+}
+
+#profitsAmount {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 25px;
+    color: #27ae60; 
+    text-align: center;
+}
+
+
+/* Media Query for smaller screens */
+@media only screen and (max-width: 768px) {
+    .dashboard {
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    .head {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+    }
+
+    .table-one {
+        margin-right: 0; /* Remove right margin for smaller screens */
+    }
+}

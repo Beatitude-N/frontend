@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    
+}
+body{
+    background-image:linear-gradient(280deg, rgba(21, 209, 252, 1), rgba(33, 175, 252, 1) 15%, rgba(255, 255, 255, 1) 100%);
+}
+
+.flex-box {
+    display: flex;
+    width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+
+.price {
+    font-size: 24px;
+    font-weight: 600;
+    color: #00aeff; /* Update color to match the buy button */
+    margin: 20px 0;
+}
+
+.member-info {
+    margin-top: 20px;
+}
+
+.member-info p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.member-info input {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.quantity p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 15px;
+}
+
+.quantity input {
+    width: 60px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Style the checkbox and its label */
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.size {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.size p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-right: 15px;
+}
+
+.psize {
+    width: 40px;
+    height: 30px;
+    border: 1px solid #ccc;
+    color: #000;
+    text-align: center;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.psize.active {
+    border-width: 1.5px;
+    color: #00aeff; /* Update color to match the buy button */
+    font-weight: 500;
+}
+
+/* Your existing styles... */
+
+
+.left {
+    width: 40%;
+}
+
+
+
+.big-img {
+    position: relative;
+    width: 250px;
+}
+
+.logo {
+    width: 40px;
+    position: absolute;
+    top: 65px; 
+    left: 120px; 
+    z-index: 2; 
+}
+
+.logo img {
+    width: 50px; /* Adjust the size of the logo as needed */
+}
+
+
+.big-img img {
+    width: inherit;
+}
+
+.images {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin-top: 15px;
+}
+
+.small-img {
+    width: 50px;
+    overflow: hidden;
+    border: 1.5px solid black;
+}
+
+.small-img img {
+    width: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.small-img:hover img {
+    transform: scale(1.2);
+}
+
+.url {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgb(0, 102, 255);
+}
+
+.pname {
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 50px;
+}
+
+
+.size {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.size p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.psize {
+    width: 60px;
+    height: 30px;
+    border: 1px solid #ff5e00;
+    color: #000;
+    text-align: center;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.psize.active {
+    border-width: 1.5px;
+    color: #ff5e00;
+    font-weight: 500;
+}
+
+.quantity {
+    display: flex;
+}
+
+.quantity p {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.quantity input {
+    width: 40px;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+    margin-left: 15px;
+}
+
+.btn-box {
+    display: flex;
+    margin-top: 40px;
+}
+
+.btn-box button {
+    font-size: 18px;
+    padding: 8px 25px;
+    border: none;
+    outline: none;
+    border-radius: 0px;
+    cursor: pointer;
+    color: white;
+}
+
+.buy-btn {
+    background-color: #1f1f21;
+}
+
+
+.buy-btn:hover {
+    background-color: #0066ff;
+}
+
+
+
+.left {
+    width: 40%;
+}
+
+.right {
+    width: 60%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+
+
+
+
+
+

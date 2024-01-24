@@ -1,0 +1,473 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin="">
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 400px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #333;
+  }
+
+  .form-step {
+    display: none;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  .form-btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 0px;
+    width: 100px;
+  }
+
+  .colors {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    
+      .pcolor {
+        cursor: pointer;
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+    
+      .pcolor.selected {
+        background-color: #1f1f21;
+        color: #fff;
+      }
+
+  #generatedForm {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+  }
+
+  #dialog {
+    width: 300px;
+    padding: 20px;
+    background-color: #fff;
+    border: 0px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+    top: -150px;
+    display: none;
+  }
+
+  
+p {
+    margin-top: 10px; /* Adjust the top margin as needed */
+    font-size: 17px;
+    color: #555;
+  }
+
+  a {
+    color: rgb(130, 187, 236);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .login-reset{
+    text-align: center;
+    margin-top: 100px;
+  }
+
+  a:hover {
+    color: #505050;
+  }
+</style>
+
+<div class="container">
+  <h1>Association Form</h1>
+
+  <form id="formGenerator" style="margin-top: 20px;">
+
+    <!-- Step 1: Association Name -->
+    <div class="form-step" data-step="1">
+      <label for="associationName">Association Name :</label>
+      <input type="text" id="productName" required="">
+    </div>
+
+    <!-- Step 2: Product Type -->
+    <div class="form-step" data-step="2" style="display: none;">
+      <label for="productType">Select Product Type :</label>
+      <select id="productType" onchange="togglePrices()" required="">
+        <option value="tshirt">T-shirt</option>
+        <option value="sweater">Sweatshirt</option>
+        <option value="both">Both</option>
+      </select>
+    </div>
+
+    
+    <!-- Step 3: Colors of T-shirt/Sweatshirt -->
+    <div class="form-step" data-step="3" style="display: none;">
+      <label>Select Colors of T-shirt/Sweatshirt</label>
+      
+      <div class="colors">
+        <div class="pcolor" id="blackColor" onclick="toggleColor('black')">Black</div>
+        <div class="pcolor" id="blueColor" onclick="toggleColor('blue')">Blue</div>
+        <div class="pcolor" id="greenColor" onclick="toggleColor('green')">Green</div>
+        <div class="pcolor" id="grayColor" onclick="toggleColor('gray')">Gray</div>
+        <div class="pcolor" id="pinkColor" onclick="toggleColor('pink')">Pink</div>
+        <div class="pcolor" id="redColor" onclick="toggleColor('red')">Red</div>
+        <div class="pcolor" id="whiteColor" onclick="toggleColor('white')">White</div>
+        <div class="pcolor" id="yellowColor" onclick="toggleColor('yellow')">Yellow</div>
+      </div>
+
+      <input type="hidden" id="selectedColorsInput" name="productColors" />
+
+    </div>
+    
+    <!-- Step 4: Prices for T-shirt/Sweatshirt -->
+    <div class="form-step" data-step="4" style="display: none;">
+      <label for="productPriceTshirt">Price for T-shirt (€0 - €16.50) :</label>
+      <input type="number" id="productPriceTshirt" name="price" min="0" max="16.50" step="0.01" value="">
+
+      <label for="productPriceSweatshirt" style="display: none;">Price for Sweatshirt (€5.60 - Max) :</label>
+      <input type="number" id="productPriceSweatshirt" name="price" style="display: none;" min="5.6" max="5000" step="0.01" value=""
+       >
+    </div>
+
+    <!-- Step 5: Email of the Association -->
+    <div class="form-step" data-step="5" style="display: none;">
+      <label for="address">Delivery Address :</label>
+      <textarea id="deliveryAddress" required=""></textarea>
+    </div>
+
+    <!-- Step 7: Association Logo -->
+    <div class="form-step" data-step="6" style="display: none;">
+      <label for="logo">Association Logo :</label>
+      <input type="file" id="fileInput" accept="image/*" required="">
+    </div>
+    <img type="hidden" style="display: none;" id="associationLogo" src="https://i.ibb.co/2F8dYFr/logo.png" alt="">
+ 
+
+
+    <!-- Step 8: RIB of the Association -->
+    <div class="form-step" data-step="7" style="display: none;">
+      <label for="rib">RIB of the Association :</label>
+      <input type="text" id="associationRIB" required="">
+    </div>
+
+    <div class="form-btn">
+      <button class="btn" type="button" onclick="prevStep()" id="prevButton">Previous</button>
+      <button class="btn" type="button" onclick="nextStep()" id="nextButton">Next</button>
+    </div>
+  </form>
+
+  <div id="generatedForm"></div>
+  <div class="login-reset">
+    <p><a href="https://lublogo.com/pages/dashboard">Go to Dashboard</a></p>
+  </div>
+</div>
+
+
+
+<div id="dialog">
+  <h1>Generated Form</h1>
+  <p>Redirecting to the dashboard...</p>
+</div>
+
+
+ <script>
+    var currentStep = 1;
+
+    var selectedColors = [];
+
+
+ const  fileInput = document.getElementById("fileInput");
+ const  associationLogo = document.getElementById("associationLogo");
+
+ fileInput.addEventListener("change", e => {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+      associationLogo.src = reader.result;
+        console.log(reader.result)
+    });
+
+    reader.readAsDataURL(file);
+ })
+
+
+
+    function toggleColor(color) {
+        var colorElement = document.getElementById(color + 'Color');
+        colorElement.classList.toggle('selected');
+
+        // Add or remove the color from the selectedColors array
+        var index = selectedColors.indexOf(color);
+        if (index === -1) {
+            selectedColors.push(color);
+        } else {
+            selectedColors.splice(index, 1);
+        }
+
+        // Update the hidden input field with the selected colors as a comma-separated string
+        document.getElementById('selectedColorsInput').value = selectedColors.join(', ');
+    }
+
+
+
+// Function to retrieve the JWT token from local storage
+function getToken() {
+    return localStorage.getItem('jwtToken');
+    
+
+  }
+
+  function togglePrices() {
+  var productType = document.getElementById('productType').value;
+  var priceTshirtLabel = document.querySelector('label[for="productPriceTshirt"]');
+  var priceTshirtInput = document.getElementById('productPriceTshirt');
+  var priceSweatshirtLabel = document.querySelector('label[for="productPriceSweatshirt"]');
+  var priceSweatshirtInput = document.getElementById('productPriceSweatshirt');
+
+  if (productType === 'tshirt') {
+    priceTshirtLabel.style.display = 'block';
+    priceTshirtInput.style.display = 'block';
+    priceSweatshirtLabel.style.display = 'none';
+    priceSweatshirtInput.style.display = 'none';
+    priceSweatshirtInput.value = "";
+    priceSweatshirtInput.removeAttribute('max');
+    priceTshirtInput.setAttribute('max', '16.50');
+  } else if (productType === 'sweater') {
+    priceTshirtLabel.style.display = 'none';
+    priceTshirtInput.style.display = 'none';
+    priceSweatshirtLabel.style.display = 'block';
+    priceSweatshirtInput.style.display = 'block';
+    priceTshirtInput.value = "";
+    priceSweatshirtInput.removeAttribute('min');
+    priceSweatshirtInput.setAttribute('min', '5.60');
+  } else if (productType === 'both') {
+    priceTshirtLabel.style.display = 'block';
+    priceTshirtInput.style.display = 'block';
+    priceSweatshirtLabel.style.display = 'block';
+    priceSweatshirtInput.style.display = 'block';
+    priceTshirtInput.setAttribute('max', '16.50');
+    priceSweatshirtInput.setAttribute('min', '5.60');
+  }
+}
+
+// Additional validation remains unchanged
+document.getElementById('productPriceTshirt').addEventListener('input', function() {
+  if (parseFloat(this.value) > parseFloat(this.getAttribute('max'))) {
+    alert('Price cannot exceed €16.50 for T-shirt.');
+    this.value = this.getAttribute('max');
+  }
+});
+
+// document.getElementById('productPriceSweatshirt').addEventListener('input', function() {
+//   if (parseFloat(this.value) < parseFloat(this.getAttribute('min'))) {
+//     alert('Price cannot below €5.60 for Sweatshirt.');
+//     this.value = this.getAttribute('min');
+//   }
+// });
+
+
+function showStep(step) {
+  // Hide all form steps
+  var formSteps = document.getElementsByClassName('form-step');
+  for (var i = 0; i < formSteps.length; i++) {
+    formSteps[i].style.display = 'none';
+  }
+
+  // Show the current step
+  var currentFormStep = document.querySelector('.form-step[data-step="' + step + '"]');
+  if (currentFormStep) {
+    currentFormStep.style.display = 'block';
+  }
+
+  // Update button text and style based on the step
+  var nextButton = document.getElementById('nextButton');
+  if (nextButton) {
+    if (step === formSteps.length) {
+      nextButton.innerText = 'Generate Form';
+      nextButton.style.width = '150px';
+      nextButton.style.backgroundColor = '#3498db';
+    } else {
+      nextButton.innerText = 'Next';
+      nextButton.style.width = '82.58px';
+      nextButton.style.backgroundColor = '#31a6ff';
+    }
+  }
+}
+
+function showPopup() {
+  // Create a dialog element
+  var dialog = document.createElement('dialog');
+  
+  // Set the content of the dialog (form generated message)
+  dialog.innerHTML = `<div style="
+    text-align: center;
+    padding: 25px;
+    border-radius: 10px;
+    background-color: #fff;"
+    >
+    <h1 style="color: #333;">Formulaire Généré</h1>
+    <p style="color: #666;">Redirection vers le tableau de bord...</p>
+    
+    </div>`;
+  
+  // Style for the dialog
+  dialog.style.width = '350px';
+  dialog.style.padding = '20px';
+  dialog.style.backgroundColor = '#fff';
+  dialog.style.border = '0px solid #ccc';
+  dialog.style.borderRadius = '10px';
+  dialog.style.boxShadow = '0px 4px 8px rgba(0, 0, 0, 0.1)';
+  dialog.style.animation = 'fadeIn 0.5s ease-in-out';
+  dialog.style.top = '-160px'; // Adjust the top position as needed
+  
+  // Keyframes for fade-in animation
+  var styleSheet = document.styleSheets[0];
+  styleSheet.insertRule('@keyframes fadeIn {\
+    from {\
+      opacity: 0;\
+      transform: translateY(-20px);\
+    }\
+    to {\
+      opacity: 1;\
+      transform: translateY(0);\
+    }\
+  }', styleSheet.cssRules.length);
+  
+  // Append the dialog to the body
+  document.body.appendChild(dialog);
+  
+  // Show the dialog
+  dialog.showModal();
+  
+  // Close the dialog after some time (e.g., 5 seconds)
+  setTimeout(function () {
+    // Close the dialog and remove it from the DOM
+    dialog.close();
+    document.body.removeChild(dialog);
+  
+    // Redirect to the dashboard
+    goToDashboard();
+  }, 5000); // Adjust the time as needed
+}
+
+function goToDashboard() {
+    // Get the logo image URL from the img tag
+    const logoUrl = document.getElementById('associationLogo').src;
+
+    // Gather other form data
+    const formData = {
+        productName: document.getElementById('productName').value,
+        productType: document.getElementById('productType').value,
+        productColors: document.getElementById('selectedColorsInput').value,
+        productPriceTshirt: document.getElementById('productPriceTshirt').value,
+        productPriceSweatshirt: document.getElementById('productPriceSweatshirt').value,
+        deliveryAddress: document.getElementById('deliveryAddress').value,
+        associationLogo: logoUrl,
+        associationRIB: document.getElementById('associationRIB').value,
+    };
+
+    const token = getToken();
+
+    // Make an HTTP POST request to the API
+    fetch('https://bea-lublogo-api.onrender.com/product', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error submitting form data to the API');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Redirect to the dashboard after successful API submission
+            window.location.href = 'https://lublogo.com/pages/dashboard';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            // Handle error if needed
+        });
+}
+
+function nextStep() {
+  // Validate current step before proceeding
+  if (validateStep(currentStep)) {
+    // Check if it's the last step before incrementing
+    if (currentStep === document.getElementsByClassName('form-step').length) {
+      // Show the popup
+      showPopup();
+    } else {
+      currentStep++;
+      showStep(currentStep);
+    }
+  }
+}
+
+function prevStep() {
+  // Move to the previous step
+  if (currentStep > 1) {
+    currentStep--;
+    showStep(currentStep);
+  }
+}
+
+function validateStep(step) {
+  // You can add validation logic here if needed
+  // For demonstration purposes, let's check if the visible input fields are not empty
+  var currentFormStep = document.querySelector('.form-step[data-step="' + step + '"]');
+  var inputElements = currentFormStep.querySelectorAll('input:not([style*="display: none"]), textarea:not([style*="display: none"]), select:not([style*="display: none"])');
+  
+  for (var i = 0; i < inputElements.length; i++) {
+    if (!inputElements[i].value) {
+      alert('Please fill in all fields before proceeding.');
+      return false;
+    }
+  }
+
+  return true;
+}
+
+// Call showStep to initially display the first step
+showStep(currentStep);
+
+  </script>
