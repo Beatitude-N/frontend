@@ -182,9 +182,6 @@ input[type="checkbox"] {
 }
 
 
-
-
-
 .size {
     display: flex;
 }
@@ -259,24 +256,6 @@ input[type="checkbox"] {
 
 
 
-.color {
-        display: flex;
-        flex-wrap: wrap;
-      }
-    
-      .pcolor {
-        cursor: pointer;
-        padding: 5px;
-        margin: 5px;
-        border: 1px solid #ccc;
-        border-radius: 0px;
-      }
-    
-      .pcolor.selected {
-        background-color: #1f1f21;
-        color: #fff;
-      }
-
       .modal {
         display: none;
         position: fixed;
@@ -333,7 +312,14 @@ input[type="checkbox"] {
     </div>
 
     <div class="right">
-        <div class="url"><h1>Béatitude</h1></div>
+        <div class="url">
+        
+            <h1 style="font-family: 'Poppins', sans-serif; font-size: 36px; color: #00aeff; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
+            <span>T shirt</span> 
+            <span>from</span>
+            <span style="color: #1f1f21;">Beatitude</span>
+            </h1>
+        </div>
         <div class="price">€24.99</div>
         <div class="member-info">
             <p>Nom du membre : <input type="text" name="memberName" required></p>
@@ -343,10 +329,40 @@ input[type="checkbox"] {
             <p style="text-align: start;">Quantité:</p>
             <input style="text-align: start;" type="number" min="1" max="5" value="1" id="quantityInput">
         </div>
-        <div style="text-align: start;">
+
+
+
+         <div style="text-align: start;">
             <label style="text-align: start;">
-                <input style="text-align: start;" type="checkbox" name="isChildSize" id="isChildSize"> Taille enfant
+                <input style="text-align: start;" type="radio" name="sizeType" value="adult" checked="checked" onchange="toggleSizeType()"> Adult
             </label>
+            <label style="text-align: start;">
+                <input style="text-align: start;" type="radio" name="sizeType" value="child" onchange="toggleSizeType()"> Child
+            </label>
+        </div>
+
+        <!-- <div style="text-align: start;">
+            <label style="text-align: start;">
+                <input style="text-align: start;" type="checkbox" name="isChildSize" id="isChildSize" onchange="toggleChildSize()"> Taille enfant
+            </label>
+        </div> -->
+        
+        
+        <div class="size" id="adultSizes">
+            <div class="psize" id="sizeX" onclick="toggleSize('X')">X</div>
+            <div class="psize" id="sizeM" onclick="toggleSize('M')">M</div>
+            <div class="psize" id="sizeL" onclick="toggleSize('L')">L</div>
+            <div class="psize" id="sizeXL" onclick="toggleSize('XL')">XL</div>
+            <div class="psize" id="sizeXXL" onclick="toggleSize('XXL')">XXL</div>
+        </div>
+        
+        <div class="size" id="childSizes" style="display:none;">
+            <div class="psize" id="size1-2" onclick="toggleSize('1-2')">1-2</div>
+            <div class="psize" id="size3-4" onclick="toggleSize('3-4')">3-4</div>
+            <div class="psize" id="size5-6" onclick="toggleSize('5-6')">5-6</div>
+            <div class="psize" id="size7-8" onclick="toggleSize('7-8')">7-8</div>
+            <div class="psize" id="size9-11" onclick="toggleSize('9-11')">9-11</div>
+            <div class="psize" id="size12-14" onclick="toggleSize('12-14')">12-14</div>
         </div>
 
         <!-- <div class="color">
@@ -359,16 +375,6 @@ input[type="checkbox"] {
             <div class="pcolor" id="whiteColor" onclick="toggleColor('white')">White</div>
             <div class="pcolor" id="yellowColor" onclick="toggleColor('yellow')">Yellow</div>
           </div> -->
-          
-
-
-          <div class="size">
-            <div class="psize" id="sizeX" onclick="toggleSize('X')">X</div>
-            <div class="psize" id="sizeM" onclick="toggleSize('M')">M</div>
-            <div class="psize" id="sizeL" onclick="toggleSize('L')">L</div>
-            <div class="psize" id="sizeXL" onclick="toggleSize('XL')">XL</div>
-            <div class="psize" id="sizeXXL" onclick="toggleSize('XXL')">XXL</div>
-        </div>
         
         <div class="btn-box">
             <button class="buy-btn" onclick="purchase()">Acheter</button>
@@ -414,6 +420,7 @@ input[type="checkbox"] {
 // }
 
 
+
 var selectedSize = null;
 
 function toggleSize(size) {
@@ -437,6 +444,20 @@ function toggleSize(size) {
     }
 }
 
+function toggleSizeType() {
+    var adultSizesDiv = document.getElementById('adultSizes');
+    var childSizesDiv = document.getElementById('childSizes');
+    var sizeType = document.querySelector('input[name="sizeType"]:checked').value;
+
+    if (sizeType === 'adult') {
+        adultSizesDiv.style.display = 'flex';
+        childSizesDiv.style.display = 'none';
+    } else if (sizeType === 'child') {
+        adultSizesDiv.style.display = 'none';
+        childSizesDiv.style.display = 'flex';
+    }
+}
+
 
 function purchase() {
     // Gather order data
@@ -447,10 +468,10 @@ function purchase() {
         size: selectedSize,   
     };
 
-    // If child size checkbox is checked
-    if (document.getElementById('isChildSize').checked) {
-        // Add logic for child size if needed
-    }
+    // // If child size checkbox is checked
+    // if (document.getElementById('isChildSize').checked) {
+    //     // Add logic for child size if needed
+    // }
 
     // Make an HTTP POST request to the API
     fetch('https://bea-lublogo-api.onrender.com/order', {
