@@ -250,7 +250,7 @@ button:hover {
             <h2 class="subtitle">Délai de livraison moyen de 12 jours</h2>
             <a href="#" class="big-button">ARRÊTER LA COLLECTE DE FONDS</a>
         </div>
-        <p><a style="text-decoration: underline; text-align: center; font-size: 13px; font-weight: 300; line-height: 20px;" href="${linkObj.link}" target="_blank">${linkObj.link}</a></p>
+        
     </div>
 
     <script>
@@ -269,7 +269,7 @@ function updateProductLink() {
                 const productLinkElement = document.getElementById('productLink');
                 let linksHTML = '';
                 data.links.forEach(linkObj => {
-                    linksHTML += `<p><a style="text-decoration: underline; text-align: center; font-size: 7px;" href="${linkObj.link}" target="_blank">${linkObj.link}</a></p>`;
+                    linksHTML += `<p><a style="text-decoration: underline; text-align: center; font-size: 13px; font-weight: 300; line-height: 20px;" href="${linkObj.link}" target="_blank">${linkObj.link}</a></p>`;
                 });
                 productLinkElement.innerHTML = linksHTML;
             })
