@@ -94,29 +94,29 @@ p {
 </style>
 <body>
   <div class="container">
-    <h1>User Registration</h1>
+    <h1>Inscription Utilisateur</h1>
     <div id="message"></div>
     <div class="form-container">
       <form id="register">
-        <label for="registerUsername">Username:</label>
+        <label for="registerUsername">Nom d'utilisateur :</label>
         <input type="text" id="registerUsername" name="registerUsername" required>
 
-        <label for="registerEmail">Email:</label>
+        <label for="registerEmail">Email :</label>
         <input type="email" id="registerEmail" name="registerEmail" required>
 
-        <label for="registerPassword">Password:</label>
+        <label for="registerPassword">Mot de passe :</label>
         <input type="password" id="registerPassword" name="registerPassword" required>
-<div class="btn">
-  <button type="submit">Register</button>
-</div>
-       
+        <div class="btn">
+          <button type="submit">S'inscrire</button>
+        </div>
       </form>
       <div class="login-reset">
-      <p>Already have an account? <a href="https://lublogo.com/pages/login">Login here</a>.</p>
-      <p>Forgot your password? <a href="https://lublogo.com/pages/forgot-password">Reset it here</a>.</p>
+        <p>Vous avez déjà un compte ? <a href="https://lublogo.com/pages/login">Connectez-vous ici</a>.</p>
+        <p>Mot de passe oublié ? <a href="https://lublogo.com/pages/forgot-password">Réinitialisez-le ici</a>.</p>
+      </div>
     </div>
-  </div>
-  </div>
+</div>
+
 
   <script>
      
@@ -127,7 +127,7 @@ p {
       
         registerForm.addEventListener('submit', function(event) {
           event.preventDefault();
-          messageElement.innerHTML = 'Registering...';
+          messageElement.innerHTML = 'Inscription en cours...';
       
           const username = document.getElementById('registerUsername').value;
           const email = document.getElementById('registerEmail').value;
@@ -146,11 +146,11 @@ p {
         return response.json();
       })
       .then(data => {
-        if (data.message === 'User registered successfully') {
+        if (data.message === 'Utilisateur inscrit avec succès') {
           // Registration successful, redirect to home page or another page
           window.location.href = 'https://lublogo.com/pages/login';
         } else {
-          messageElement.innerHTML = data.error || 'Registration failed';
+          messageElement.innerHTML = data.error || 'Échec de l inscription';
         }
       })
       .catch(error => {

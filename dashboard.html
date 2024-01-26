@@ -211,47 +211,46 @@ button:hover {
 }
 </style>
 
-    <div class="dashboard">
-        <h1>Votre tableau de bord</h1>
+<div class="dashboard">
+    <h1>Votre tableau de bord</h1>
 
-        <div class="head">
-            <div class="table-one">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Buyer Name</th>
-                            <th>Size</th>
-                            <!-- <th>Color</th> -->
-                            <th>Quantity</th>
-                        </tr>
-                    </thead>
-                    <tbody id="orders-table-body">
-                        <!-- Table rows will be dynamically added here -->
-                    </tbody>
-                </table>
-            </div>
-            <div class="profits-box">
-                <h2>Association's profit:</h2>
-                <p id="profitsAmount">1 000 $</p>
-            </div>
+    <div class="head">
+        <div class="table-one">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom de l'acheteur</th>
+                        <th>Taille</th>
+                        <!-- <th>Couleur</th> -->
+                        <th>Quantité</th>
+                    </tr>
+                </thead>
+                <tbody id="orders-table-body">
+                    <!-- Les lignes du tableau seront ajoutées dynamiquement ici -->
+                </tbody>
+            </table>
         </div>
-
-        <div class="barcode-share">
-            <div class="barcode-scanner">
-                <img id="qrCodeImage" alt="Image du code QR" src="https://i.ibb.co/sPZ1Hk2/qr.png">
-            </div>
-            <div class="share-link">
-                <div id="productLink">loading....</div>
-                <button onclick="copyProductLink()">Copier le lien</button>
-            </div>
+        <div class="profits-box">
+            <h2>Bénéfice de l'association :</h2>
+            <p id="profitsAmount">1 000 $</p>
         </div>
-        
-        <div class="stop-btn">
-            <h2 class="subtitle">Délai de livraison moyen de 12 jours</h2>
-            <a href="#" class="big-button">ARRÊTER LA COLLECTE DE FONDS</a>
-        </div>
-        
     </div>
+
+    <div class="barcode-share">
+        <div class="barcode-scanner">
+            <img id="qrCodeImage" alt="Image du code QR" src="https://i.ibb.co/sPZ1Hk2/qr.png">
+        </div>
+        <div class="share-link">
+            <div id="productLink">chargement....</div>
+            <button onclick="copyProductLink()">Copier le lien</button>
+        </div>
+    </div>
+    
+    <div class="stop-btn">
+        <h2 class="subtitle">Délai de livraison moyen de 12 jours</h2>
+        <a href="#" class="big-button">ARRÊTER LA COLLECTE DE FONDS</a>
+    </div>
+</div>
 
     <script>
 

@@ -99,25 +99,26 @@
 </style>
 <body>
   <div class="container">
-    <h1>User Login</h1>
+    <h1>Connexion Utilisateur</h1>
     <div id="message"></div>
     <div class="form-container">
       <form id="login">
-        <label for="loginEmail">Email:</label>
+        <label for="loginEmail">Email :</label>
         <input type="email" id="loginEmail" name="loginEmail" required>
 
-        <label for="loginPassword">Password:</label>
+        <label for="loginPassword">Mot de passe :</label>
         <input type="password" id="loginPassword" name="loginPassword" required>
         <div class="btn">
-        <button type="submit">Login</button>
+        <button type="submit">Se connecter</button>
         </div>
       </form>
       <div class="login-reset">
-        <p>Don't have an account? <a href="https://lublogo.com/pages/register">Register here</a>.</p>
-        <p>Forgot your password? <a href="https://lublogo.com/pages/forgot-password">Reset it here</a>.</p>
+        <p>Vous n'avez pas de compte ? <a href="https://lublogo.com/pages/register">Inscrivez-vous ici</a>.</p>
+        <p>Mot de passe oublié ? <a href="https://lublogo.com/pages/forgot-password">Réinitialisez-le ici</a>.</p>
       </div>
     </div>
   </div>
+
 
   <script>
    // login.js
@@ -127,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   loginForm.addEventListener('submit', function(event) {
     event.preventDefault();
-    messageElement.innerHTML = 'Logging in...';
+    messageElement.innerHTML = 'Connexion en cours...';
 
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
@@ -144,7 +145,7 @@ fetch('https://bea-lublogo-api.onrender.com/login', {
   .then(data => {
     console.log('API Response:', data); // Log the data received from the API
 
-    if (data.message === 'Login successful') {
+    if (data.message === 'Connexion réussie') {
       // Login successful, wait for 4 seconds, then redirect to the association page
 
       const token = data.token;
@@ -156,7 +157,7 @@ localStorage.setItem('jwtToken', token);
       window.location.href = 'associationForm.html';
       }, 2000); // 4000 milliseconds = 4 seconds
     } else {
-      messageElement.innerHTML = data.error || 'Login failed';
+      messageElement.innerHTML = data.error || 'Échec de la connexion';
       }
     })
     .catch(error => {
