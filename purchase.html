@@ -287,6 +287,11 @@ input[type="checkbox"] {
 
 </style>
 
+<input type="text" id="sellerProductIdInput" placeholder="Enter Seller Product ID">
+<button onclick="fetchProductDetails()">Fetch Product Details</button>
+
+<div id="productDetails"></div>
+
 <div class="flex-box">
     <div class="left">
         <div class="big-img">
@@ -425,11 +430,11 @@ input[type="checkbox"] {
 //     }
 // }
 
-
-
 async function fetchProductDetails() {
+
+    const sellerProductId = document.getElementById("sellerProductIdInput").value;
             try {
-                const response = await fetch('https://bea-lublogo-api.onrender.com/product/65b3188774c1044d8bee5a1e');
+                const response = await fetch(`https://bea-lublogo-api.onrender.com/product/${sellerProductId}`);
                 const data = await response.json();
                 console.log(data);
 
