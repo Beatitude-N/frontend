@@ -128,9 +128,9 @@ p {
     <div class="form-step" data-step="2" style="display: none;">
       <label for="productType">Select Product Type :</label>
       <select id="productType" onchange="togglePrices()" required="">
-        <option value="tshirt">T-shirt</option>
-        <option value="sweater">Sweatshirt</option>
-        <option value="both">Both</option>
+        <option value="T-shirt">T-shirt</option>
+        <option value="Sweatshirt">Sweatshirt</option>
+        <option value="Both T-shirt and Sweatshirt">Both</option>
       </select>
     </div>
 
@@ -156,11 +156,11 @@ p {
     
     <!-- Step 4: Prices for T-shirt/Sweatshirt -->
     <div class="form-step" data-step="4" style="display: none;">
-      <label for="productPriceTshirt">Price for T-shirt (€0 - €16.50) :</label>
-      <input type="number" id="productPriceTshirt" name="price" min="0" max="16.50" step="0.01" value="">
+      <label for="productPriceTshirt">Purchase Price for T-shirt (€5.60) :</label>
+      <input type="number" id="productPriceTshirt" name="price" min="5.60" max="5000" step="0.01" value="">
 
-      <label for="productPriceSweatshirt" style="display: none;">Price for Sweatshirt (€5.60 - Max) :</label>
-      <input type="number" id="productPriceSweatshirt" name="price" style="display: none;" min="5.6" max="5000" step="0.01" value=""
+      <label for="productPriceSweatshirt" style="display: none;"> Purchase Price for Sweatshirt (€14.30 ) :</label>
+      <input type="number" id="productPriceSweatshirt" name="price" style="display: none;" min="14.3" max="5000" step="0.01" value=""
        >
     </div>
 
@@ -260,15 +260,15 @@ function getToken() {
   var priceSweatshirtLabel = document.querySelector('label[for="productPriceSweatshirt"]');
   var priceSweatshirtInput = document.getElementById('productPriceSweatshirt');
 
-  if (productType === 'tshirt') {
+  if (productType === 'T-shirt') {
     priceTshirtLabel.style.display = 'block';
     priceTshirtInput.style.display = 'block';
     priceSweatshirtLabel.style.display = 'none';
     priceSweatshirtInput.style.display = 'none';
     priceSweatshirtInput.value = "";
-    priceSweatshirtInput.removeAttribute('max');
-    priceTshirtInput.setAttribute('max', '16.50');
-  } else if (productType === 'sweater') {
+    priceSweatshirtInput.removeAttribute('min');
+    priceTshirtInput.setAttribute('min', '5.60');
+  } else if (productType === 'Sweatshirt') {
     priceTshirtLabel.style.display = 'none';
     priceTshirtInput.style.display = 'none';
     priceSweatshirtLabel.style.display = 'block';
@@ -276,23 +276,23 @@ function getToken() {
     priceTshirtInput.value = "";
     priceSweatshirtInput.removeAttribute('min');
     priceSweatshirtInput.setAttribute('min', '5.60');
-  } else if (productType === 'both') {
+  } else if (productType === 'Both T-shirt and Sweatshirt') {
     priceTshirtLabel.style.display = 'block';
     priceTshirtInput.style.display = 'block';
     priceSweatshirtLabel.style.display = 'block';
     priceSweatshirtInput.style.display = 'block';
-    priceTshirtInput.setAttribute('max', '16.50');
-    priceSweatshirtInput.setAttribute('min', '5.60');
+    priceTshirtInput.setAttribute('min', '5.60');
+    priceSweatshirtInput.setAttribute('min', '14.30');
   }
 }
 
 // Additional validation remains unchanged
-document.getElementById('productPriceTshirt').addEventListener('input', function() {
-  if (parseFloat(this.value) > parseFloat(this.getAttribute('max'))) {
-    alert('Price cannot exceed €16.50 for T-shirt.');
-    this.value = this.getAttribute('max');
-  }
-});
+// document.getElementById('productPriceTshirt').addEventListener('input', function() {
+//   if (parseFloat(this.value) < parseFloat(this.getAttribute('max'))) {
+//     alert('Price cannot below €5.60 for T-shirt.');
+//     this.value = this.getAttribute('min');
+//   }
+// });
 
 // document.getElementById('productPriceSweatshirt').addEventListener('input', function() {
 //   if (parseFloat(this.value) < parseFloat(this.getAttribute('min'))) {

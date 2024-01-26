@@ -292,7 +292,7 @@ input[type="checkbox"] {
         <div class="big-img">
             <img src="https://i.ibb.co/0rkfL85/front-black-ss.png" alt="Image du produit">
             <div class="logo">
-                <img src="https://i.ibb.co/2F8dYFr/logo.png" alt="Logo">
+                <img id="associationLogo" src="" alt="Logo">
             </div>
         </div>
         <div class="images">
@@ -315,12 +315,14 @@ input[type="checkbox"] {
         <div class="url">
         
             <h1 style="font-family: 'Poppins', sans-serif; font-size: 36px; color: #00aeff; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);">
-            <span>T shirt</span> 
+            <span id="productType"></span> 
             <span>from</span>
-            <span style="color: #1f1f21;">Beatitude</span>
+            <span id="productName" style="color: #1f1f21;"></span>
             </h1>
         </div>
-        <div class="price">€24.99</div>
+        <div  class="price"><span>€</span><span id="productPriceSweatshirt"></span></div>
+
+
         <div class="member-info">
             <p>Nom du membre : <input type="text" name="memberName" required></p>
         </div>
@@ -340,7 +342,11 @@ input[type="checkbox"] {
                 <input style="text-align: start;" type="radio" name="sizeType" value="child" onchange="toggleSizeType()"> Child
             </label>
         </div>
+ 
 
+        <div style="display: none;">
+               <textarea id="proId"   name="" id="" cols="30" rows="10"></textarea>
+        </div>
         <!-- <div style="text-align: start;">
             <label style="text-align: start;">
                 <input style="text-align: start;" type="checkbox" name="isChildSize" id="isChildSize" onchange="toggleChildSize()"> Taille enfant
@@ -421,6 +427,27 @@ input[type="checkbox"] {
 
 
 
+async function fetchProductDetails() {
+            try {
+                const response = await fetch('https://bea-lublogo-api.onrender.com/product/65b3188774c1044d8bee5a1e');
+                const data = await response.json();
+                console.log(data);
+
+                // Update HTML elements with product details
+                
+                document.getElementById('proId').innerText = data._id;
+                document.getElementById('productName').innerText = data.productName;
+                document.getElementById('associationLogo').src = data.associationLogo;
+                document.getElementById('productType').innerText = data.productType;
+                document.getElementById('productPriceSweatshirt').innerText = data.productPriceSweatshirt || data.productPriceTshirt;
+            } catch (error) {
+                console.error('Error fetching product details:', error);
+            }
+        }
+
+          // Call the function to fetch product details when the page loads
+       window.onload = fetchProductDetails;
+
 var selectedSize = null;
 
 function toggleSize(size) {
@@ -464,6 +491,7 @@ function purchase() {
     var orderData = {
         memberName: document.querySelector('.member-info input').value,
         quantity: document.getElementById('quantityInput').value,
+        productId: document.getElementById("proId").value,
        // color: selectedColor, 
         size: selectedSize,   
     };
