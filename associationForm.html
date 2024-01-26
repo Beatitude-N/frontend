@@ -404,7 +404,6 @@ function goToDashboard() {
 
     const token = getToken();
 
-    // Make an HTTP POST request to the API
     fetch('https://bea-lublogo-api.onrender.com/product', {
         method: 'POST',
         headers: {
@@ -413,21 +412,50 @@ function goToDashboard() {
         },
         body: JSON.stringify(formData),
     })
-        .then(response => {
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error submitting form data to the API');
+        }
+        return response.json();
+      
+    })
+
+
+    .then(data => {
+      console.log(data); // Check the structure of the response
+    const productId = data._id;
+    if (!productId) {
+        throw new Error('Product ID not found in the response');
+    }
+    console.log('Product ID:', productId);
+
+        // Build the product link using the productId
+        const link = `https://lublogo.com/pages/order?productId=${productId}`;
+        
+        // Make an HTTP POST request to create the shareable link
+        return fetch('https://bea-lublogo-api.onrender.com/link', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ link,}), // Combine into a single object
+        }).then(response => {
             if (!response.ok) {
-                throw new Error('Error submitting form data to the API');
+                throw new Error('Error creating shareable link');
             }
             return response.json();
-        })
-        .then(data => {
-            // Redirect to the dashboard after successful API submission
-            window.location.href = 'https://lublogo.com/pages/dashboard';
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Handle error if needed
         });
+    })
+    .then(() => {
+        window.location.href = 'https://lublogo.com/pages/dashboard';
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Handle error if needed
+     });
 }
+
+
 
 function nextStep() {
   // Validate current step before proceeding
