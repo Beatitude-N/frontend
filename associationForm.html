@@ -286,20 +286,20 @@ function getToken() {
   }
 }
 
-//Additional validation remains unchanged
-document.getElementById('productPriceTshirt').addEventListener('input', function() {
+document.getElementById('productPriceTshirt').addEventListener('blur', function() {
   if (parseFloat(this.value) < parseFloat(this.getAttribute('min'))) {
-    alert('Price cannot below €5.60 for T-shirt.');
+    alert('Price cannot be below €5.60 for T-shirt.');
     this.value = this.getAttribute('min');
   }
 });
 
-document.getElementById('productPriceSweatshirt').addEventListener('input', function() {
+document.getElementById('productPriceSweatshirt').addEventListener('blur', function() {
   if (parseFloat(this.value) < parseFloat(this.getAttribute('min'))) {
-    alert('Price cannot below €5.60 for Sweatshirt.');
+    alert('Price cannot be below €5.60 for Sweatshirt.');
     this.value = this.getAttribute('min');
   }
 });
+
 
 
 function showStep(step) {
