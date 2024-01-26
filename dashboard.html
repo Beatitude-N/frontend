@@ -241,7 +241,7 @@ button:hover {
                 <img id="qrCodeImage" alt="Image du code QR" src="https://i.ibb.co/sPZ1Hk2/qr.png">
             </div>
             <div class="share-link">
-                <div id="productLink">https://lublogo.com/</div>
+                <div id="productLink">loading....</div>
                 <button onclick="copyProductLink()">Copier le lien</button>
             </div>
         </div>
@@ -253,6 +253,39 @@ button:hover {
     </div>
 
     <script>
+
+function updateProductLink() {
+        fetch('https://bea-lublogo-api.onrender.com/seller',{
+            method: 'GET',
+              headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem("jwtToken")}` // Retrieve authentication token from local storage
+                    }
+        })
+        .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                const productLinkElement = document.getElementById('productLink');
+                let linksHTML = '';
+                data.links.forEach(linkObj => {
+                    linksHTML += `<p><a style="text-decoration: underline; text-align: center; font-size: 7px;" href="${linkObj.link}" target="_blank">${linkObj.link}</a></p>`;
+                });
+                productLinkElement.innerHTML = linksHTML;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }
+
+
+
+    // Function to copy the link (you need to implement this)
+    function copyProductLink() {
+        // Implement copy functionality here
+    }
+
+ 
+
         // Function to fetch data from the API and update the table
         async function fetchDataAndUpdateTable() {
             try {
@@ -297,15 +330,12 @@ button:hover {
             document.getElementById("profitsAmount").innerText = profits;
         }
 
-        // Function to copy product link
-        function copyProductLink() {
-            // Your copy product link functionality goes here
-        }
-
+    
         // Call the functions when the page loads
         window.onload = function() {
             fetchDataAndUpdateTable();
             updateProfits();
+            updateProductLink();
         };
     </script>
 </body>
