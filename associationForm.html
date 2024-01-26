@@ -428,9 +428,17 @@ function goToDashboard() {
         throw new Error('Product ID not found in the response');
     }
     console.log('Product ID:', productId);
+      
+// Build the product link using the productId
+const link = `https://lublogo.com/pages/order?productId=${productId}`;
+        
+         // Gather other form data
+    const linkData = {
+        productId: productId,
+        link: link
+    };
 
-        // Build the product link using the productId
-        const link = `https://lublogo.com/pages/order?productId=${productId}`;
+
         
         // Make an HTTP POST request to create the shareable link
         return fetch('https://bea-lublogo-api.onrender.com/link', {
@@ -438,7 +446,7 @@ function goToDashboard() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ link,}), // Combine into a single object
+            body: JSON.stringify(linkData), // Combine into a single object
         }).then(response => {
             if (!response.ok) {
                 throw new Error('Error creating shareable link');
